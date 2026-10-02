@@ -3,6 +3,7 @@ const documentationSections = [
     title: 'Product',
     items: [
       { id: 'introduction', title: 'Introduction', file: '../README.md' },
+      { id: 'documentation-map', title: 'Documentation map', file: 'README.md' },
       { id: 'product-plan', title: 'Product plan', file: 'PLAN_COMPARISON.md' },
       { id: 'troubleshooting', title: 'Troubleshooting', file: 'TROUBLESHOOTING.md' },
       { id: 'privacy', title: 'Privacy', file: 'PRIVACY.md' },

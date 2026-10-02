@@ -98,3 +98,7 @@ Manual validation still required:
 - Do not restore the legacy options page or interval polling.
 - Preserve message and DOM identifiers unless a coordinated migration is documented.
 - Do not mark a version ready until `docs/RELEASE_CHECKLIST.md` is complete.
+
+## DOC-STD-20261002 — Documentation organization
+
+Added a canonical documentation map and a portal navigation entry without changing existing ids, extension permissions or message contracts. The README links to the public installation site. Documentation validation is tracked separately from the incomplete extension release checklist.

@@ -99,3 +99,9 @@ No pending changes.
 - First functional Manifest V3 prototype.
 - Selection and full-page reading.
 - Playback controls and local preferences.
+
+## DOC-STD-20261002 — Documentation map
+
+- Added reading paths for users, developers and maintainers.
+- Clarified the difference between the installation website and the Chrome extension.
+- Preserved existing manual release and store-submission requirements.

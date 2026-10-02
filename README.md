@@ -130,3 +130,7 @@ SmartRead is developed in short, verifiable phases.
 ## Repository
 
 Project home: [github.com/dafermen/SmartRead](https://github.com/dafermen/SmartRead)
+
+## DOC-STD-20261002 — Documentation entry point
+
+Use the [documentation map](docs/README.md) to find the authoritative guide for trying, developing or maintaining SmartRead. The public [installation site](https://smartread.innovalogic.tech/) provides instructions and documentation; the extension still needs to be installed in Chrome.
