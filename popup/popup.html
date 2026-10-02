@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartRead</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="smartread-popup">
+      <header class="app-header">
+        <div class="brand">
+          <img class="brand-mark" src="../icons/icon48.png" alt="" />
+          <div><p class="eyebrow" id="tagline">Listen without losing your place</p><h1>SmartRead</h1></div>
+        </div>
+        <p id="smartreadStatus" class="status-badge" aria-live="polite"><span class="status-dot" aria-hidden="true"></span><span id="statusText">Ready</span></p>
+      </header>
+
+      <section id="onboarding" class="onboarding" aria-labelledby="onboardingTitle" hidden>
+        <span class="onboarding-step">1 · 2 · 3</span>
+        <h2 id="onboardingTitle">Your first reading</h2>
+        <ol><li id="onboardingStep1">Select text on the page, or choose the full page.</li><li id="onboardingStep2">Press Play and adjust the speed.</li><li id="onboardingStep3">SmartRead highlights the current sentence.</li></ol>
+        <button id="dismissOnboarding" class="button button-primary" type="button">Got it</button>
+      </section>
+
+      <section class="source-actions" aria-label="Choose what to read">
+        <button id="readSelection" class="button button-primary" type="button">Read selected text</button>
+        <button id="readPage" class="button button-secondary" type="button">Read this page</button>
+      </section>
+
+      <section class="player-card" aria-label="Playback">
+        <div class="transport">
+          <button id="previous" class="transport-button" type="button" title="Previous"><span aria-hidden="true">&#9198;</span></button>
+          <button id="play" class="transport-button transport-button-main" type="button" title="Play"><span aria-hidden="true">&#9654;</span></button>
+          <button id="pause" class="transport-button" type="button" title="Pause"><span aria-hidden="true">&#10074;&#10074;</span></button>
+          <button id="stop" class="transport-button" type="button" title="Stop"><span aria-hidden="true">&#9632;</span></button>
+          <button id="next" class="transport-button" type="button" title="Next"><span aria-hidden="true">&#9197;</span></button>
+        </div>
+        <div class="now-reading">
+          <div class="section-heading"><span id="labelCurrentSentence">Current sentence</span><span id="progressText" class="progress-text">No active text</span></div>
+          <div id="readProgress" class="read-progress" role="progressbar" aria-label="Reading progress" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><span class="read-progress-fill" id="progressFill"></span></div>
+          <p id="currentSentence" class="current-sentence" aria-live="polite">No sentence yet.</p>
+        </div>
+      </section>
+
+      <section id="settingsPanel" class="settings-card" aria-labelledby="settingsTitle">
+        <div class="settings-header"><div><h2 id="settingsTitle">Reading controls</h2><p id="settingsHint">Adjust the sound without leaving this panel.</p></div><span class="settings-icon" aria-hidden="true">&#9881;</span></div>
+        <div class="setting-block">
+          <div class="setting-title-row"><label id="labelRate" for="rateRange">Speed</label><output id="rateLabel" class="setting-value" for="rateRange">1.00x</output></div>
+          <div class="range-control"><button id="rateDown" class="step-button" type="button">-</button><input id="rateRange" type="range" min="0.25" max="2" step="0.05" value="1" /><button id="rateUp" class="step-button" type="button">+</button></div>
+          <div class="range-scale" aria-hidden="true"><span>0.25x</span><span>2.00x</span></div>
+        </div>
+        <div class="setting-block">
+          <div class="setting-title-row"><label id="labelVolume" for="volumeRange">Volume</label><output id="volumeLabel" class="setting-value" for="volumeRange">100%</output></div>
+          <div class="range-control"><button id="volumeDown" class="step-button" type="button">-</button><input id="volumeRange" type="range" min="0" max="1" step="0.05" value="1" /><button id="volumeUp" class="step-button" type="button">+</button></div>
+          <div class="range-scale" aria-hidden="true"><span>0%</span><span>100%</span></div>
+        </div>
+
+        <label class="contrast-control" for="highContrast">
+          <span><strong id="highContrastLabel">High contrast</strong><small id="highContrastHint">Stronger colors and focus indicators</small></span>
+          <span class="switch"><input id="highContrast" type="checkbox" /><span class="switch-track" aria-hidden="true"></span></span>
+        </label>
+        <p id="settingFeedback" class="setting-feedback" aria-live="polite"></p>
+        <button id="openOptions" class="advanced-toggle" type="button" aria-controls="advancedSettings" aria-expanded="false"><span id="advancedButtonText">Voice and language</span><span class="chevron" aria-hidden="true">&#8964;</span></button>
+        <div id="advancedSettings" class="advanced-settings" hidden>
+          <label class="field" for="voiceSelect"><span id="labelVoice">Voice</span><select id="voiceSelect"></select></label>
+          <div class="field-grid">
+            <label class="field" for="languageSelect"><span id="labelSpeechLanguage">Speech language</span><select id="languageSelect"><option value="en-US">English (US)</option><option value="es-ES">Spanish (Spain)</option></select></label>
+            <label class="field" for="uiLanguage"><span id="labelInterfaceLanguage">Interface language</span><select id="uiLanguage" disabled><option value="en">English</option></select></label>
+          </div>
+        </div>
+        <div class="utility-actions"><button id="resetSettings" class="utility-button" type="button">Reset settings</button><button id="openDocumentation" class="utility-button utility-button-docs" type="button">Documentation ↗</button></div>
+      </section>
+      <p id="keyboardHint" class="keyboard-hint">Keyboard: Space play/pause · ← previous · → next</p>
+    </main>
+    <script src="popup.js" type="module"></script>
+  </body>
+</html>

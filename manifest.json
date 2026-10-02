@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "SmartRead",
+  "version": "0.4.1",
+  "description": "Read selected content or page text aloud with native speech synthesis.",
+  "permissions": ["activeTab", "contextMenus", "storage", "scripting"],
+  "background": {
+    "service_worker": "background/service-worker.js",
+    "type": "module"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "SmartRead",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "commands": {
+    "smartread-toggle": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "SmartRead play/pause toggle"
+    },
+    "smartread-stop": {
+      "suggested_key": {
+        "default": "Alt+Shift+X"
+      },
+      "description": "SmartRead stop"
+    }
+  },
+  "minimum_chrome_version": "109"
+}

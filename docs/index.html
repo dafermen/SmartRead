@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>SmartRead Documentation</title>
+    <link rel="icon" href="../icons/icon32.png" />
+    <link rel="stylesheet" href="portal.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#docContent">Skip to content</a>
+
+    <header class="topbar">
+      <button id="menuButton" class="icon-button menu-button" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false">
+        <span aria-hidden="true">☰</span>
+      </button>
+
+      <a class="brand" href="#doc=introduction" aria-label="SmartRead documentation home">
+        <img src="../icons/icon48.png" alt="" />
+        <span><strong>SmartRead</strong><small>Documentation</small></span>
+      </a>
+
+      <nav class="top-links" aria-label="Primary documentation">
+        <a href="#doc=introduction">Documentation</a>
+        <a href="#doc=product-plan">Product</a>
+        <a href="#doc=architecture">Architecture</a>
+        <a href="#doc=current-status">Status</a>
+      </nav>
+
+      <div class="search" role="search">
+        <label class="sr-only" for="searchInput">Search documentation</label>
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="Search docs" autocomplete="off" aria-controls="searchResults" aria-expanded="false" />
+        <kbd>/</kbd>
+        <div id="searchResults" class="search-results" role="listbox" hidden></div>
+      </div>
+
+      <button id="themeButton" class="theme-button" type="button" aria-label="Switch to dark theme" title="Switch theme">
+        <span class="theme-symbol" aria-hidden="true">◐</span>
+        <span id="themeLabel">Dark</span>
+      </button>
+
+      <a class="back-link desktop-back" href="../popup/popup.html" target="_self">← Back to SmartRead</a>
+    </header>
+
+    <div id="drawerOverlay" class="drawer-overlay" hidden></div>
+
+    <div class="docs-layout">
+      <aside id="sidebar" class="sidebar" aria-label="Documentation navigation">
+        <div class="mobile-sidebar-header">
+          <strong>Browse documentation</strong>
+          <button id="closeMenuButton" class="icon-button" type="button" aria-label="Close navigation">×</button>
+        </div>
+        <a class="back-link mobile-back" href="../popup/popup.html" target="_self">← Back to SmartRead</a>
+        <nav id="sidebarNav"></nav>
+        <div class="sidebar-note">
+          <strong>Local-first</strong>
+          <span>Documentation is bundled with the extension and works offline.</span>
+        </div>
+      </aside>
+
+      <main class="main-column">
+        <nav id="breadcrumbs" class="breadcrumbs" aria-label="Breadcrumb"></nav>
+        <article id="docContent" class="doc-content" tabindex="-1" aria-live="polite">
+          <div class="loading-state"><span></span><p>Loading documentation…</p></div>
+        </article>
+        <nav id="pageNavigation" class="page-navigation" aria-label="Previous and next pages"></nav>
+      </main>
+
+      <aside class="toc-column" aria-label="On this page">
+        <div class="toc-card">
+          <strong>On this page</strong>
+          <nav id="tocNav"></nav>
+        </div>
+      </aside>
+    </div>
+
+    <div id="liveRegion" class="sr-only" aria-live="polite"></div>
+    <script src="app.js" defer></script>
+  </body>
+</html>
