@@ -1,16 +1,10 @@
-<p align="center">
-  <img src="icons/icon128.png" width="96" height="96" alt="SmartRead icon">
-</p>
+![SmartRead icon](icons/icon128.png)
 
-<h1 align="center">SmartRead</h1>
+# SmartRead
 
-<p align="center">
-  Read selected text or complete web pages aloud without leaving the browser.
-</p>
+Read selected text or complete web pages aloud without leaving the browser.
 
-<p align="center">
-  <strong>Chrome Manifest V3 · Local-first · No accounts · No analytics</strong>
-</p>
+**Chrome Manifest V3 · Local-first · No accounts · No analytics**
 
 SmartRead uses the browser's native `SpeechSynthesis` API. Page text and preferences
 stay in the local Chrome profile; the extension has no application server or cloud API.
@@ -34,9 +28,7 @@ speech language may still be changed to read content in other languages.
 The following images were captured from SmartRead `0.4.1` running as an unpacked
 extension in Google Chrome.
 
-<p align="center">
-  <img src="docs/images/smartread-popup.png" width="314" alt="SmartRead popup with playback and reading controls">
-</p>
+![SmartRead popup with playback and reading controls](docs/images/smartread-popup.png)
 
 ### Bundled documentation
 
