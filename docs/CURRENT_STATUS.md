@@ -1,5 +1,9 @@
 # CURRENT STATUS - SmartRead
 
+## Documentation web navigation v1 — local candidate, 2026-10-03
+
+InnovaLogic documentation theme, reading paths and reading controls are implemented. JavaScript syntax; browser at 1440 and 390 px: content search, clipboard, theme, menu Escape and image dialog. See [navigation maintenance and evidence](WEB_NAVIGATION.md). GitHub and server delivery of this revision are pending; earlier deployment status below remains historical evidence.
+
 ## Updated
 
 - 2026-10-01
