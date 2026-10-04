@@ -1,16 +1,10 @@
-<p align="center">
-  <img src="icons/icon128.png" width="96" height="96" alt="SmartRead icon">
-</p>
+![SmartRead icon](icons/icon128.png)
 
-<h1 align="center">SmartRead</h1>
+# SmartRead
 
-<p align="center">
-  Read selected text or complete web pages aloud without leaving the browser.
-</p>
+Read selected text or complete web pages aloud without leaving the browser.
 
-<p align="center">
-  <strong>Chrome Manifest V3 · Local-first · No accounts · No analytics</strong>
-</p>
+**Chrome Manifest V3 · Local-first · No accounts · No analytics**
 
 SmartRead uses the browser's native `SpeechSynthesis` API. Page text and preferences
 stay in the local Chrome profile; the extension has no application server or cloud API.
@@ -20,7 +14,7 @@ stay in the local Chrome profile; the extension has no application server or clo
 - Read selected text or the main content of a page.
 - Play, pause, stop, and move between sentences.
 - Adjust speed and volume directly in the popup.
-- Select a speech voice and reading language.
+- Choose English or Spanish and select a compatible installed voice directly in the popup.
 - Store preferences locally with `chrome.storage.local`.
 - Use `Alt+Shift+S` to play/pause and `Alt+Shift+X` to stop.
 - Highlight the sentence currently being read.
@@ -31,12 +25,10 @@ speech language may still be changed to read content in other languages.
 
 ## Product preview
 
-The following images were captured from SmartRead `0.4.1` running as an unpacked
+The following images were captured from SmartRead `0.5.0` running as an unpacked
 extension in Google Chrome.
 
-<p align="center">
-  <img src="docs/images/smartread-popup.png" width="314" alt="SmartRead popup with playback and reading controls">
-</p>
+![SmartRead popup with playback and reading controls](docs/images/smartread-popup.png)
 
 ### Bundled documentation
 

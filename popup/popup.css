@@ -806,9 +806,35 @@ input[type="range"]::-webkit-slider-thumb {
 
 .advanced-settings {
   margin-top: 10px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #f8fafc;
   animation: reveal 180ms ease both;
+}
+
+.advanced-toggle[hidden],
+.field[hidden] {
+  display: none !important;
+}
+
+.language-voice-heading h3 {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Aptos", "Segoe UI Variable", "Segoe UI", sans-serif;
+  font-size: 14px;
+}
+
+.language-voice-heading p {
+  margin: 3px 0 11px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.voice-fields {
+  display: grid;
+  gap: 10px;
 }
 
 .field {

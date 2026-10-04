@@ -16,9 +16,16 @@ test('splits readable text and caps long segments', () => {
 });
 
 test('sanitizes settings and preserves invariants', () => {
-  const settings = core.sanitizeSettings({ rate: 99, volume: -4, uiLanguage: 'fr', highContrast: true });
+  const settings = core.sanitizeSettings({ language: 'es-ES', voiceURI: 'spanish-voice', rate: 99, volume: -4, uiLanguage: 'fr', highContrast: true });
+  assert.equal(settings.language, 'es-ES');
+  assert.equal(settings.voiceURI, 'spanish-voice');
   assert.equal(settings.rate, 2);
   assert.equal(settings.volume, 0);
   assert.equal(settings.uiLanguage, 'en');
   assert.equal(settings.highContrast, true);
+});
+
+test('segments Spanish text with the selected reading locale', () => {
+  const sentences = core.splitSentences('Hola. ¿Cómo estás? Muy bien.', 'es-ES');
+  assert.equal(sentences.length, 3);
 });

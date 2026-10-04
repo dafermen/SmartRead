@@ -1,9 +1,13 @@
 # CURRENT STATUS - SmartRead
 
+## Documentation web navigation v1 — local candidate, 2026-10-03
+
+InnovaLogic documentation theme, reading paths and reading controls are implemented. JavaScript syntax; browser at 1440 and 390 px: content search, clipboard, theme, menu Escape and image dialog. See [navigation maintenance and evidence](WEB_NAVIGATION.md). GitHub and server delivery of this revision are pending; earlier deployment status below remains historical evidence.
+
 ## Updated
 
-- 2026-10-01
-- Current version: `0.4.1`
+- 2026-10-03
+- Current version: `0.5.0`
 
 ## Current phase
 
@@ -21,6 +25,8 @@
 - Speed from `0.25x` to `2.00x` directly in the popup.
 - Volume from `0%` to `100%` directly in the popup.
 - Voice and speech-language selection.
+- Always-visible English/Spanish selector with language-filtered installed voices.
+- Automatic voice fallback that avoids selecting a voice from the wrong language.
 - Local preference persistence.
 - First-use tutorial and friendly error messages.
 - Save confirmation, keyboard navigation, native tooltips, and high contrast.
@@ -60,11 +66,15 @@
 
 ## Pending validation
 
-Automated validation completed on 2026-10-01:
+- Automated validation completed: 7/7 tests passed, syntax checks passed, and the `0.5.0` distribution package was generated successfully.
+- Chrome acceptance completed: version `0.5.0` loaded successfully, English and Spanish selectors are visible, and installed voices are filtered by the selected language.
+- Manual audio playback remains a user acceptance check because sound output depends on the operating system and installed Chrome voices.
+
+Automated validation completed on 2026-10-03:
 
 - `npm test` passed syntax checks and all 6 unit tests.
-- `npm run package` created `dist/SmartRead-0.4.1.zip` successfully.
-- Chrome loaded and reloaded unpacked version `0.4.1` successfully.
+- `npm run package` created `dist/SmartRead-0.5.0.zip` successfully.
+- Chrome loaded and reloaded unpacked version `0.5.0` successfully.
 - Popup and bundled documentation opened successfully in Chrome.
 - Static secret and dangerous-API scans found no exposed credentials or remote executable code.
 
@@ -98,6 +108,13 @@ Manual validation still required:
 - Do not restore the legacy options page or interval polling.
 - Preserve message and DOM identifiers unless a coordinated migration is documented.
 - Do not mark a version ready until `docs/RELEASE_CHECKLIST.md` is complete.
+
+## DEPLOY-20261002 — Public installation and documentation site
+
+- https://smartread.innovalogic.tech/ hosts installation guidance and the documentation portal over HTTPS.
+- The website is not a browser-hosted extension. It links to the existing source repository for development installation; no new extension release or store publication is claimed.
+- The web copy adapts README HTML to the portal renderer and resolves images from the site root. The bundled extension documentation and its native Back to SmartRead link remain unchanged; the server redirects that popup path to installation guidance.
+- Existing syntax/unit tests passed. Desktop/mobile site checks passed. The extension release checklist remains independent and incomplete.
 
 ## DOC-STD-20261002 — Documentation organization
 

@@ -8,6 +8,18 @@ kept in `manifest.json`.
 
 No pending changes.
 
+## [0.5.0] - 2026-10-03
+
+### Added
+
+- Always-visible English and Spanish reading-language selector in the popup.
+- Installed voice selector filtered to the selected language.
+- Automatic voice option when no specific installed voice is preferred.
+
+### Changed
+
+- Voice resolution now prefers the exact locale, then the selected language family, and never falls back to an unrelated language.
+
 ## [0.4.1] - 2026-10-01
 
 ### Added
@@ -99,6 +111,10 @@ No pending changes.
 - First functional Manifest V3 prototype.
 - Selection and full-page reading.
 - Playback controls and local preferences.
+
+## DEPLOY-20261002
+
+- Added a public HTTPS installation and documentation website at smartread.innovalogic.tech. Extension functionality, manifest and release status are unchanged.
 
 ## DOC-STD-20261002 — Documentation map
 

@@ -68,6 +68,7 @@ const refs = {
 };
 
 let activeDocument = null;
+let routeSequence = 0;
 
 function escapeHtml(value) {
   return String(value)
@@ -266,10 +267,10 @@ async function fetchDocument(entry) {
 
 function renderSidebar() {
   refs.sidebarNav.innerHTML = documentationSections.map((section) => `
-    <section class="nav-section">
-      <h2>${escapeHtml(section.title)}</h2>
+    <details class="nav-section" open>
+      <summary>${escapeHtml(section.title)}</summary>
       ${section.items.map((item) => `<a href="${documentHash(item.id)}" data-doc-id="${item.id}">${escapeHtml(item.title)}</a>`).join('')}
-    </section>
+    </details>
   `).join('');
 }
 
@@ -277,7 +278,7 @@ function setActiveNavigation(documentId) {
   refs.sidebarNav.querySelectorAll('[data-doc-id]').forEach((link) => {
     const active = link.dataset.docId === documentId;
     link.classList.toggle('is-active', active);
-    if (active) link.setAttribute('aria-current', 'page');
+    if (active) { link.setAttribute('aria-current', 'page'); link.closest('details').open = true; }
     else link.removeAttribute('aria-current');
   });
 }
@@ -328,6 +329,7 @@ function scrollToSection(sectionId) {
 }
 
 async function loadRoute({ focusContent = false } = {}) {
+  const sequence = ++routeSequence;
   const route = routeFromHash();
   const entry = allDocuments.find((item) => item.id === route.documentId) || allDocuments[0];
   activeDocument = entry;
@@ -338,8 +340,20 @@ async function loadRoute({ focusContent = false } = {}) {
 
   try {
     const markdown = await fetchDocument(entry);
+    if (sequence !== routeSequence) return;
     const rendered = renderMarkdown(markdown);
     refs.docContent.innerHTML = rendered.html;
+    refs.docContent.querySelectorAll('img').forEach(image => {
+      image.src = new URL(image.getAttribute('src'), new URL(entry.file, location.href)).href;
+    });
+    if (entry.id === 'introduction') {
+      const paths = document.createElement('nav');
+      paths.className = 'docs-reading-paths';
+      paths.setAttribute('aria-label', 'Reading paths');
+      paths.innerHTML = `<a href="${documentHash('product-plan')}"><strong>Discover the product</strong><span>Purpose, capabilities and scope.</span></a><a href="${documentHash('introduction', 'local-installation')}"><strong>Learn to use it</strong><span>Installation and reading controls.</span></a><a href="${documentHash('development')}"><strong>Explore development</strong><span>Setup, architecture and tests.</span></a>`;
+      refs.docContent.prepend(paths);
+    }
+    window.InnovaLogicDocs.enhance(refs.docContent);
     renderToc(rendered.toc);
     renderPager(entry);
     document.title = `${entry.title} · SmartRead Documentation`;
@@ -349,6 +363,7 @@ async function loadRoute({ focusContent = false } = {}) {
     scrollToSection(route.sectionId);
     if (focusContent) refs.docContent.focus({ preventScroll: true });
   } catch (error) {
+    if (sequence !== routeSequence) return;
     refs.docContent.innerHTML = `<div class="error-state"><strong>Document unavailable</strong><p>${escapeHtml(error.message)}</p><button type="button" id="retryButton">Try again</button></div>`;
     refs.docContent.removeAttribute('aria-busy');
     document.getElementById('retryButton')?.addEventListener('click', () => {
@@ -376,7 +391,7 @@ function findDocumentForLink(href, currentEntry) {
 
 function plainText(markdown) {
   return markdown
-    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/```[^\n]*\n|```/g, ' ')
     .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/[#>*_`|\-]/g, ' ')
@@ -430,14 +445,15 @@ async function updateSearch() {
 
 function applyTheme(theme) {
   document.documentElement.dataset.theme = theme;
-  localStorage.setItem('smartReadDocsTheme', theme);
+  try { localStorage.setItem('smartReadDocsTheme', theme); } catch { /* In-memory theme remains usable. */ }
   const dark = theme === 'dark';
   refs.themeLabel.textContent = dark ? 'Light' : 'Dark';
   refs.themeButton.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
 }
 
 function initializeTheme() {
-  const saved = localStorage.getItem('smartReadDocsTheme');
+  let saved;
+  try { saved = localStorage.getItem('smartReadDocsTheme'); } catch { /* Use system preference. */ }
   const preferred = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   applyTheme(saved === 'dark' || saved === 'light' ? saved : preferred);
 }
@@ -459,6 +475,7 @@ refs.docContent.addEventListener('click', (event) => {
   const href = link.getAttribute('href') || '';
   if (href.startsWith('#')) {
     event.preventDefault();
+    if (href.startsWith('#doc=')) { location.hash = href; return; }
     const sectionId = href.slice(1);
     location.hash = documentHash(activeDocument.id, sectionId);
     return;
@@ -466,7 +483,10 @@ refs.docContent.addEventListener('click', (event) => {
   const matchingDocument = findDocumentForLink(href, activeDocument);
   if (matchingDocument) {
     event.preventDefault();
-    location.hash = documentHash(matchingDocument.id);
+    const fragment = new URL(href, new URL(activeDocument.file, location.href)).hash.slice(1);
+    let section = fragment;
+    try { section = decodeURIComponent(fragment); } catch { /* Preserve malformed fragment. */ }
+    location.hash = documentHash(matchingDocument.id, section);
   }
 });
 

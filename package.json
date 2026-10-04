@@ -1,6 +1,6 @@
 {
   "name": "smartread-chrome-extension",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "private": true,
   "description": "Chrome Manifest V3 extension for reading web text aloud.",
   "scripts": {

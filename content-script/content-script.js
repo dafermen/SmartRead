@@ -1,6 +1,10 @@
 (() => {
-  const CONTENT_VERSION = '0.2.1';
+  const CONTENT_VERSION = '0.5.0';
   if (globalThis.__smartReadContentLoaded === CONTENT_VERSION) return;
+  if (globalThis.__smartReadContentLoaded) {
+    document.getElementById('smartread-panel')?.remove();
+    speechSynthesis.cancel();
+  }
   const core = globalThis.SmartReadCore;
   if (!core) {
     console.warn('SmartRead reader core is not available yet.');
@@ -222,11 +226,16 @@
   }
 
   function resolveVoice() {
+    const requestedLanguage = String(settings.language || '').toLowerCase().replace('_', '-');
+    const requestedBase = requestedLanguage.split('-')[0];
     if (settings.voiceURI) {
       const selected = voices.find((voice) => voice.voiceURI === settings.voiceURI);
-      if (selected) return selected;
+      const selectedBase = String(selected?.lang || '').toLowerCase().split(/[-_]/)[0];
+      if (selected && selectedBase === requestedBase) return selected;
     }
-    return voices.find((voice) => voice.lang?.startsWith(settings.language)) || voices[0] || null;
+    return voices.find((voice) => String(voice.lang || '').toLowerCase().replace('_', '-') === requestedLanguage)
+      || voices.find((voice) => String(voice.lang || '').toLowerCase().split(/[-_]/)[0] === requestedBase)
+      || null;
   }
 
   function fail(errorCode, message) {
